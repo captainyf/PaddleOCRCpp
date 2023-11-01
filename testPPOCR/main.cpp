@@ -55,6 +55,17 @@ std::string Utf8ToGbk(const char* src_str)
 int main(int argc, char** argv)
 {
 	//1.获取SDK版本号
+	int bufLen = 20;
+	char* buf = (char*)malloc(bufLen);
+	int errorCodeVersion = 0;
+	OCR_GetVersion(buf, &bufLen, &errorCodeVersion);
+	if (errorCodeVersion != OCR_OK)
+	{
+		std::cout << "获取版本号失败" << std::endl;
+		return 0;
+	}
+	std::cout << "version number: " << buf << std::endl;
+	free(buf);
 
 	//2.OCR模型初始化
 	std::string modelFolderPath = "../PPOCR/models/";
